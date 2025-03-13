@@ -21,6 +21,7 @@ public class EmployeeEntity {
     private String firstName;
     private String lastName;
     private String email;
+    private String password;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<DepartmentEntity> departmentEntity = new ArrayList<>();
