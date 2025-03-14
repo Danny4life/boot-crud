@@ -5,8 +5,6 @@ import com.osiki.Boot_CRUD.payload.response.DepartmentResponse;
 
 public interface DepartmentService {
 
-   // DepartmentResponse createDepartment(DepartmentRequest request);
-
     String joinDept(Long id, DepartmentRequest request);
 }
 

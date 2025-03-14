@@ -18,23 +18,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     private final EmployeeRepository employeeRepository;
 
-
-    @Override
-    public DepartmentResponse createDepartment(DepartmentRequest request) {
-
-        DepartmentEntity department = DepartmentEntity.builder()
-                .departmentName(request.getDepartmentName())
-                .build();
-
-        departmentRepository.save(department);
-
-
-        return DepartmentResponse.builder()
-                .id(department.getId())
-                .departmentName(department.getDepartmentName())
-                .build();
-    }
-
     @Override
     public String joinDept(Long id, DepartmentRequest request) {
 
