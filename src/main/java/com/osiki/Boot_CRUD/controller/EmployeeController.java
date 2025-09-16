@@ -5,10 +5,7 @@ import com.osiki.Boot_CRUD.payload.response.EmployeeResponse;
 import com.osiki.Boot_CRUD.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/employee")
@@ -23,5 +20,18 @@ public class EmployeeController {
 
         return ResponseEntity.ok(employeeService.createEmployee(request));
 
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EmployeeResponse> updateEmployee(
+            @PathVariable Long id,
+            @RequestBody EmployeeRequest request) {
+        return ResponseEntity.ok(employeeService.updateEmployee(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        return ResponseEntity.noContent().build();
     }
 }

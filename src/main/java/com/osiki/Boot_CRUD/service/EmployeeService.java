@@ -6,4 +6,8 @@ import com.osiki.Boot_CRUD.payload.response.EmployeeResponse;
 public interface EmployeeService {
 
     EmployeeResponse createEmployee(EmployeeRequest request);
+
+    EmployeeResponse updateEmployee(Long id, EmployeeRequest request);
+
+    void deleteEmployee(Long id);
 }

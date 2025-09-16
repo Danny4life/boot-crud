@@ -44,4 +44,42 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .email(employee.getEmail())
                 .build();
     }
+
+    @Override
+    public EmployeeResponse updateEmployee(Long id, EmployeeRequest request) {
+        EmployeeEntity employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found with id " + id));
+
+        employee.setFirstName(request.getFirstName());
+        employee.setLastName(request.getLastName());
+        employee.setEmail(request.getEmail());
+        employee.setPassword(request.getPassword());
+
+        EmployeeEntity updatedEmployee = employeeRepository.save(employee);
+
+        return EmployeeResponse.builder()
+                .id(updatedEmployee.getId())
+                .firstName(updatedEmployee.getFirstName())
+                .lastName(updatedEmployee.getLastName())
+                .email(updatedEmployee.getEmail())
+                .build();
+    }
+
+    @Override
+    public void deleteEmployee(Long id) {
+        EmployeeEntity employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found with id " + id));
+
+        employeeRepository.delete(employee);
+
+        // Optional: send farewell email
+        EmailDetails emailDetails = EmailDetails.builder()
+                .recipient(employee.getEmail())
+                .subject("ACCOUNT DELETION")
+                .messageBody("Hello " + employee.getFirstName() + " " + employee.getLastName() +
+                        ", your account has been deleted from our system.")
+                .build();
+
+        emailService.sendEmailAlert(emailDetails);
+    }
 }
