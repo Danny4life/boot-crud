@@ -17,8 +17,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
 
 
-    // i am a human
-
     private final EmailService emailService;
     @Override
     public EmployeeResponse createEmployee(EmployeeRequest request) {
